@@ -1,0 +1,43 @@
+{{ define "jiralert.default" }}
+
+{{ .CommonAnnotations.description }}
+
+h3. *Alert Information*
+- *Status:* {{ .Status }}{{ range $key, $value := .CommonLabels }}
+- *{{ $key }}:* {{ $value }}{{ end }}
+
+h3. Details
+*Group Labels:*
+{{ range $key, $value := .GroupLabels }}
+- *{{ $key }}:* {{ $value }}
+{{ end }}
+
+*Common Labels:*
+{{ range $key, $value := .CommonLabels }}
+- *{{ $key }}:* {{ $value }}
+{{ end }}
+
+*External URL:* [{{ .ExternalURL }}]({{ .ExternalURL }})
+
+h3. Alerts
+
+{{ range .Alerts }}
+- *Alert:*
+-- *Starts At:* {{ .StartsAt }}
+-- *Ends At:* {{ .EndsAt }}
+-- *Annotations:*{{ range $key, $value := .Annotations }}
+--- *{{ $key }}:* {{ $value }}{{ end }}
+-- *Generator URL:* [{{ .GeneratorURL }}]({{ .GeneratorURL }})
+-- *Labels:*{{ range $key, $value := .Labels }}
+--- *{{ $key }}:* {{ $value }}{{ end }}
+
+{{ end }}
+
+h3. Additional Information
+
+*Receiver:* {{ .Receiver }}
+*External URL:* [{{ .ExternalURL }}]({{ .ExternalURL }})
+
+*Version:* {{ .Version }}
+*Group Key:* {{ .GroupKey }}
+{{ end }}

@@ -1,0 +1,7 @@
+services:
+
+  jiralert:
+    build: .
+    container_name: jiralert
+    ports:
+      - 9097:9097

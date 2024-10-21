@@ -1,0 +1,54 @@
+{
+    "receiver": "jira-receiver",
+    "status": "firing",
+    "alerts": [
+      {
+        "status": "firing",
+        "labels": {
+          "alertname": "HighCPUUsage",
+          "instance": "server1",
+          "severity": "critical",
+          "job": "node_exporter"
+        },
+        "annotations": {
+          "summary": "CPU usage is above 70% on server1",
+          "description": "The CPU usage on server1 has been over 90% for more than 5 minutes."
+        },
+        "startsAt": "2024-10-20T14:02:00Z",
+        "endsAt": "2024-10-20T14:07:00Z",
+        "generatorURL": "http://prometheus.example.com/graph?g0.expr=cpu_usage_idle%7Binstance%3D%22server1%22%7D%3C10"
+      },
+      {
+        "status": "firing",
+        "labels": {
+          "alertname": "HighMemoryUsage",
+          "instance": "server2",
+          "severity": "warning",
+          "job": "node_exporter"
+        },
+        "annotations": {
+          "summary": "Memory usage is above 70% on server2",
+          "description": "The memory usage on server2 has been over 80% for more than 5 minutes."
+        },
+        "startsAt": "2024-10-20T14:05:00Z",
+        "endsAt": "2024-10-20T14:10:00Z",
+        "generatorURL": "http://prometheus.example.com/graph?g0.expr=memory_usage_bytes%7Binstance%3D%22server2%22%7D%3E80"
+      }
+    ],
+    "groupLabels": {
+      "alertname": "HighResourceUsage"
+    },
+    "commonLabels": {
+      "alertname": "HighResourceUsage",
+      "severity": "critical",
+      "team-owner": "TeamName"
+    },
+    "commonAnnotations": {
+      "summary": "Multiple resources are over usage thresholds",
+      "description": "Several instances have high resource usage. Please investigate."
+    },
+    "externalURL": "http://alertmanager.example.com",
+    "version": "4",
+    "groupKey": "{}:{alertname=\"HighResourceUsage\"}"
+  }
+  

@@ -1,0 +1,65 @@
+---
+# Global defaults, applied to all receivers where not explicitly overridden. Optional.
+defaults:
+  # API access fields.
+  api_url: <jira site url>
+  user: '<jira user, in general a e-mail>'
+  password: 'jira api token created in user account'
+  # Alternatively to user and password use a Personal Access Token
+  # personal_access_token: "Your Personal Access Token". See https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html
+
+  # JIRA project to create the issue in. Required.
+  project: <jira project>
+  # The type of JIRA issue to create. Required.
+  issue_type: Task
+  # Issue priority. Optional.
+  priority: High
+  # Go template invocation for generating the summary. Required.
+  summary: '{{ .CommonLabels.alertname }} - {{ .CommonAnnotations.summary }}'
+
+  # Go template invocation for generating the description. Optional.
+  description: "{{ template \"jiralert.default\" . }}"
+
+  # State to transition into when reopening a closed issue. Required.
+  reopen_state: To Do
+  # Do not reopen issues with this resolution. Optional.
+  wont_fix_resolution: "Won't Fix"
+  # Amount of time after being closed that an issue should be reopened, after which, a new issue is created.
+  # Optional (default: always reopen)
+  reopen_duration: 0h
+
+  # Copy all Prometheus labels into separate JIRA labels. Optional (default: false).
+  #add_group_labels: true
+  # Static label that will be added to the JIRA ticket alongisde the JIRALERT{...} or ALERT{...} label
+  static_labels: ["StaticLabelDefault"]
+  # Other projects are the projects to search for existing issues for the given alerts if
+  # the main project does not have it. If no issue was found in, the main projects will
+  # be used to create a new one. If the old issue is found in one of the other projects
+  # (first found is used in case of duplicates) that old project's issue will be used for
+  # alert updates instead of creating on in the main project.
+  #other_projects: ["OTHER1", "OTHER2"]
+  # Include ticket update as comment. Optional (default: false).
+  #update_in_comment: true
+  
+# Receiver definitions. At least one must be defined.
+receivers:
+    # Must match the Alertmanager receiver name. Required.
+  - name: 'jira-receiver'
+    # Will be merged with the static_labels from the default map
+    static_labels: ["StaticLabelReceiver"]
+    # JIRA components. Optional. If used, the field must be configured on Jira project 
+    #components: ['Operations']
+    fields:
+      # TextField
+      #customfield_10001: "Random text"
+      # SelectList
+      #customfield_10002: {"value": "red"}
+      # MultiSelect
+      #customfield_10003: [{"value": "red"}, {"value": "blue"}, {"value": "green"}]
+
+    # Automatically resolve jira issues when alert is resolved. Optional. If declared, ensure state is not an empty string.
+    auto_resolve:
+      state: 'Done'
+
+# File containing template definitions. Required.
+template: jiralert.tmpl
