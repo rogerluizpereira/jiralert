@@ -44,13 +44,13 @@ jobs:
   save-as-artifact:
     needs: build
     if: ${{ github.event.inputs.destination == 'artifact' }}
-    uses: ./.github/workflows/common-steps/push-image-to-artifact.yml
+    uses: ./.github/workflows/push-image-to-artifact.yml
     with:
       artifact_name: ${IMAGE_NAME}
 
   push-to-ecr:
     needs: build
     if: ${{ github.event.inputs.destination == 'ecr' }}
-    uses: ./.github/workflows/common-steps/push-image-to-ecr.yml
+    uses: ./.github/workflows/push-image-to-ecr.yml
     with:
       image_name: ${IMAGE_NAME}
