@@ -39,8 +39,10 @@ jobs:
           else
             VERSION=${{ github.event.inputs.branch || github.ref_name }}
           fi
-          echo "REPO_NAME=${REPO_NAME} >> $GITHUB_OUTPUT >> $GITHUB_ENV"
-          echo "VERSION=${VERSION} >> $GITHUB_OUTPUT >> $GITHUB_ENV"
+          echo "REPO_NAME=${REPO_NAME} >> $GITHUB_ENV"
+          echo "VERSION=${VERSION} >> $GITHUB_ENV"
+          echo "REPO_NAME=${REPO_NAME} >> $GITHUB_OUTBUT"
+          echo "VERSION=${VERSION} >> $GITHUB_OUTPUT"
           echo "IMAGE_NAME=${REPO_NAME}:${VERSION} >> $GITHUB_OUTPUT"
 
       - name: Build Docker image
