@@ -48,6 +48,7 @@ jobs:
 
       - name: Build Docker image
         run: |
+          IMAGE_NAME=${{ steps.extract-info.outputs.IMAGE_NAME }}
           DOCKERFILE_PATH=./Dockerfile
           echo "Building image: $IMAGE_NAME using Dockerfile at: $DOCKERFILE_PATH"
           docker build -f $DOCKERFILE_PATH -t $IMAGE_NAME .
