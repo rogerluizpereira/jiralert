@@ -1,43 +1,35 @@
-{{ define "jiralert.default" }}
+{{ define "jiralert.summary" }}
+{{ .CommonLabels.alertname }} | {{ if .CommonLabels.target_group }}{{ .CommonLabels.target_group }}{{end}}{{ if .CommonLabels.service_name }}{{ .CommonLabels.service_name }}{{end}}{{ if .CommonLabels.name }}{{ .CommonLabels.name }}{{end}}{{ if .CommonLabels.queue_name }}{{ .CommonLabels.queue_name }}{{end}}{{ if .CommonLabels.queue }}{{ .CommonLabels.queue }}{{end}}{{ if .CommonLabels.cluster_identifier }}{{ .CommonLabels.cluster_identifier }}{{end}}{{ if .CommonLabels.instance }}{{ .CommonLabels.instance }}{{end}}{{ if .CommonLabels.instance_id }}{{ .CommonLabels.instance_id }}{{end}}{{ if .CommonLabels.cluster_name }}{{ .CommonLabels.cluster_name }}{{end}}{{ if .CommonLabels.db_instance }}{{ .CommonLabels.db_instance }}{{end}}{{ if .CommonLabels.domain_name }}{{ .CommonLabels.domain_name }}{{end}}{{ if .CommonLabels.node_id }}{{ .CommonLabels.node_id }}{{end}}
+{{end}}
 
-{{ .CommonAnnotations.description }}
+{{ define "jiralert.description" }}
 
 h3. *Alert Information*
-- *Status:* {{ .Status }}{{ range $key, $value := .CommonLabels }}
+- *Status:* {{ .Status }}
+{{ range $key, $value := .GroupLabels }}
 - *{{ $key }}:* {{ $value }}{{ end }}
 
-h3. Details
-*Group Labels:*
-{{ range $key, $value := .GroupLabels }}
-- *{{ $key }}:* {{ $value }}
-{{ end }}
-
-*Common Labels:*
-{{ range $key, $value := .CommonLabels }}
-- *{{ $key }}:* {{ $value }}
-{{ end }}
-
-*External URL:* [{{ .ExternalURL }}]({{ .ExternalURL }})
-
 h3. Alerts
-
 {{ range .Alerts }}
-- *Alert:*
--- *Starts At:* {{ .StartsAt }}
--- *Ends At:* {{ .EndsAt }}
--- *Annotations:*{{ range $key, $value := .Annotations }}
---- *{{ $key }}:* {{ $value }}{{ end }}
--- *Generator URL:* [{{ .GeneratorURL }}]({{ .GeneratorURL }})
--- *Labels:*{{ range $key, $value := .Labels }}
---- *{{ $key }}:* {{ $value }}{{ end }}
-
+    {{$Labels := .Labels}}
+    - *Alert:*
+    -- *Starts At:* {{ .StartsAt }}
+    -- *Ends At:* {{ .EndsAt }}
+    -- *Annotations:*{{ range $key, $value := .Annotations }}
+    --- *{{ $key }}:* {{ $value }}{{ end }}
+    --- *[Generator URL|{{ .GeneratorURL }}]*
+    -- *Labels:*{{ range $key, $value := .Labels }}
+    --- *{{ $key }}:* {{ $value }}{{ end }}
 {{ end }}
 
-h3. Additional Information
+h3. Additional Information:*
 
-*Receiver:* {{ .Receiver }}
-*External URL:* [{{ .ExternalURL }}]({{ .ExternalURL }})
+{{ range $key, $value := .CommonLabels }}
+- *{{ $key }}:* {{ $value }}{{ end }}
 
-*Version:* {{ .Version }}
-*Group Key:* {{ .GroupKey }}
+- *Receiver:* {{ .Receiver }}
+- *External URL:* [{{ .ExternalURL }}]
+
+- *Version:* {{ .Version }}
+- *Group Key:* {{ .GroupKey }}
 {{ end }}

@@ -1,9 +1,9 @@
 {
-  "receiver": "jira-receiver",
-  "status": "Resolved",
+  "receiver": "jiralert",
+  "status": "resolved",
   "alerts": [
     {
-      "status": "Resolved",
+      "status": "resolved",
       "labels": {
         "alertname": "HighCPUUsage",
         "instance": "server1",
@@ -19,7 +19,7 @@
       "generatorURL": "http://prometheus.example.com/graph?g0.expr=cpu_usage_idle%7Binstance%3D%22server1%22%7D%3C10"
     },
     {
-      "status": "Resolved",
+      "status": "resolved",
       "labels": {
         "alertname": "HighMemoryUsage",
         "instance": "server2",
@@ -36,11 +36,13 @@
     }
   ],
   "groupLabels": {
-    "alertname": "HighResourceUsage"
+    "alertname": "HighResourceUsage",
+    "service_name": "nome_servico"
   },
   "commonLabels": {
     "alertname": "HighResourceUsage",
     "severity": "critical",
+    "service_name": "nome_servico",
     "team-owner": "TeamName"
   },
   "commonAnnotations": {

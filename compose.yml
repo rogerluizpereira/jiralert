@@ -3,5 +3,13 @@ services:
   jiralert:
     build: .
     container_name: jiralert
+    environment:
+      JIRA_API_URL: ${JIRA_API_URL}
+      JIRA_USER: ${JIRA_USER}
+      JIRA_TOKEN: ${JIRA_TOKEN}
+      JIRA_PROJECT: ${JIRA_PROJECT}
+      AWS_PROFILE: ${AWS_PROFILE}
     ports:
       - 9097:9097
+    volumes:
+      - ~/.aws/:/root/.aws:ro
