@@ -9,6 +9,10 @@ on:
         default: 'master'
       destination:
         description: 'Where to save the Docker image: ecr or artifact'
+        type: choice
+        options:
+          - ecr
+          - artifact
         required: true
         default: 'ecr'
   
