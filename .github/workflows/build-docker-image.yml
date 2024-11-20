@@ -51,13 +51,13 @@ jobs:
     if: ${{ github.event.inputs.destination == 'artifact' }}
     uses: ./.github/workflows/push-image-to-artifact.yml
     with:
-      artifact_name: ${IMAGE_NAME}
+      artifact_name: $IMAGE_NAME
 
   push-to-ecr:
     needs: build
     if: ${{ github.event.inputs.destination == 'ecr' }}
     uses: ./.github/workflows/push-image-to-ecr.yml
     with:
-      image_name: ${IMAGE_NAME}
+      image_name: $IMAGE_NAME
     secrets:
       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
