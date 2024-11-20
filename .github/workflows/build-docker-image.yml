@@ -65,3 +65,4 @@ jobs:
       image_name:  ${{ needs.build.outputs.IMAGE_NAME }}
     secrets:
       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
