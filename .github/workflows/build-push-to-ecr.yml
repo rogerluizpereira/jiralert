@@ -1,0 +1,69 @@
+name: Build and Push Docker Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build from'
+        required: false
+        default: 'master'
+      destination:
+        description: 'Where to save the Docker image: ecr or artifact'
+        type: choice
+        options:
+          - ecr
+          - artifact
+        required: true
+        default: 'ecr'
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      REPO_NAME: ${{ steps.extract-info.outputs.REPO_NAME }}
+      VERSION: ${{ steps.extract-info.outputs.VERSION }}
+      IMAGE_NAME: ${{ steps.extract-info.outputs.IMAGE_NAME }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch || github.ref_name }}
+
+      - name: Extract repository name and version
+        id: extract-info
+        run: |
+          REPO_NAME=${GITHUB_REPOSITORY##*/}
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            VERSION=${GITHUB_REF_NAME}
+          else
+            VERSION=${{ github.event.inputs.branch || github.ref_name }}
+          fi
+          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_OUTPUT
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+          echo "IMAGE_NAME=${REPO_NAME}:${VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Build Docker image
+        run: |          
+          echo "Building image:${{ steps.extract-info.outputs.IMAGE_NAME }}"
+          docker build --platform linux/amd64 -t ${{ steps.extract-info.outputs.IMAGE_NAME }} .
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Authenticate Docker with ECR
+        run: |
+          aws ecr get-login-password --region ${{ vars.AWS_REGION }} | \
+          docker login --username AWS --password-stdin ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com
+
+      - name: Push Docker image to ECR
+        run: |
+          ECR_URI=${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.ECR_REPOSITORY }}
+          echo "Tagging and pushing image to ECR: $ECR_URI"
+          docker tag ${{ steps.extract-info.outputs.IMAGE_NAME }} $ECR_URI
+          docker push $ECR_URI
