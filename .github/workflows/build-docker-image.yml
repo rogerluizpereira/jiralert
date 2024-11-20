@@ -58,3 +58,5 @@ jobs:
     uses: ./.github/workflows/push-image-to-ecr.yml
     with:
       image_name: ${IMAGE_NAME}
+    secrets:
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
