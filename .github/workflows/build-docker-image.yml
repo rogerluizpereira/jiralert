@@ -39,9 +39,6 @@ jobs:
           else
             VERSION=${{ github.event.inputs.branch || github.ref_name }}
           fi
-          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          echo "IMAGE_NAME=${REPO_NAME}:${VERSION}" >> $GITHUB_ENV
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_OUTPUT
           echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
           echo "IMAGE_NAME=${REPO_NAME}:${VERSION}" >> $GITHUB_OUTPUT
@@ -58,7 +55,7 @@ jobs:
     if: ${{ github.event.inputs.destination == 'artifact' }}
     uses: ./.github/workflows/push-image-to-artifact.yml
     with:
-      artifact_name: ${{ needs.build.outputs.IMAGE_NAME }}
+      artifact_name: ${{ needs.build.outputs.REPO_NAME }}_${{ needs.build.outputs.VERSION }}
 
   push-to-ecr:
     needs: build
