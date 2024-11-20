@@ -42,7 +42,7 @@ jobs:
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
           echo "IMAGE_NAME=${REPO_NAME}:${VERSION}" >> $GITHUB_ENV
-          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_OUTBUT
+          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_OUTPUT
           echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
           echo "IMAGE_NAME=${REPO_NAME}:${VERSION}" >> $GITHUB_OUTPUT
 
