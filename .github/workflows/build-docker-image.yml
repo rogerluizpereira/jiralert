@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch to build from (optional for manual execution)'
+        description: 'Branch to build from'
         required: false
-        default: 'main'
+        default: 'master'
       destination:
         description: 'Where to save the Docker image: ecr or artifact'
         required: true
-        default: 'artifact'
-
+        default: 'ecr'
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,13 +44,13 @@ jobs:
   save-as-artifact:
     needs: build
     if: ${{ github.event.inputs.destination == 'artifact' }}
-    uses: ./.github/workflows/push-image-to-artifact.yml
+    uses: ./.github/workflows/common-steps/push-image-to-artifact.yml
     with:
-      artifact_name: ${{ env.REPO_NAME }}_${{ env.VERSION }}
+      artifact_name: ${IMAGE_NAME}
 
   push-to-ecr:
     needs: build
     if: ${{ github.event.inputs.destination == 'ecr' }}
-    uses: ./.github/workflows/push-image-to-ecr.yml
+    uses: ./.github/workflows/common-steps/push-image-to-ecr.yml
     with:
-      image_name: ${{ env.REPO_NAME }}:${{ env.VERSION }}
+      image_name: ${IMAGE_NAME}
