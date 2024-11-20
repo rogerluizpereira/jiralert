@@ -1,5 +1,5 @@
 {
-    "receiver": "jira-receiver",
+    "receiver": "jiralert",
     "status": "firing",
     "alerts": [
       {
@@ -36,11 +36,13 @@
       }
     ],
     "groupLabels": {
-      "alertname": "HighResourceUsage"
+      "alertname": "HighResourceUsage",
+      "service_name": "nome_servico"
     },
     "commonLabels": {
       "alertname": "HighResourceUsage",
       "severity": "critical",
+      "service_name": "nome_servico",
       "team-owner": "TeamName"
     },
     "commonAnnotations": {

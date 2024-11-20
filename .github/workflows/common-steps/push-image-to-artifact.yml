@@ -1,0 +1,24 @@
+name: Save Docker Image as Artifact
+
+on:
+  workflow_call:
+    inputs:
+      artifact_name:
+        description: 'Name of the artifact to upload'
+        required: true
+
+jobs:
+  save-artifact:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Save Docker image as artifact
+        run: |
+          echo "Saving Docker image: ${{ inputs.artifact_name }} as ${{ inputs.artifact_name }}.tar.gz"
+          docker save ${{ inputs.artifact_name }} | gzip > ${{ inputs.artifact_name }}.tar.gz
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: ${{ inputs.artifact_name }}.tar.gz

@@ -1,0 +1,25 @@
+global:
+
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 1h
+  receiver: "jiralert" # Receiver default, recebe todas as mensagens, independente da rota.
+  routes:
+    - receiver: "jiralert"
+      matchers: 
+        - severity=~"critical"
+      continue: true
+
+
+receivers:
+  - name: "jiralert"
+    webhook_configs:
+      - url: ${JIRALERT_URL}
+        send_resolved: true
+        http_config:
+          headers:
+            Content-Type: application/json
+          tls_config:
+            insecure_skip_verify: true  # Ajuste para SSL não confiável, se necessário

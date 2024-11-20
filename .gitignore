@@ -1,0 +1,12 @@
+# IDE configurations
+.vscode/
+
+# .env files
+.env
+
+# Docker-specific files
+/var/lib/docker
+
+# Logs and temp files
+*.log
+*.tmp
