@@ -58,5 +58,4 @@ jobs:
           ECR_URI=${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.ECR_REPOSITORY }}
           echo "Tagging and pushing image to ECR: $ECR_URI"
           docker tag ${{ steps.extract-info.outputs.IMAGE_NAME }} $ECR_URI:${{ steps.extract-info.outputs.VERSION }}
-          docker tag ${{ steps.extract-info.outputs.IMAGE_NAME }} $ECR_URI
           docker push --all-tags $ECR_URI
