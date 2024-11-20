@@ -35,5 +35,5 @@ jobs:
         run: |
           ECR_URI=${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.ECR_REPOSITORY }}
           echo "Tagging and pushing image to ECR: $ECR_URI"
-          docker tag ${{ inputs.image_name }} $ECR_URI
+          docker tag localhost/${{ inputs.image_name }} $ECR_URI
           docker push $ECR_URI
