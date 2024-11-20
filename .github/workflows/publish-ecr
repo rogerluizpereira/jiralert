@@ -1,0 +1,50 @@
+name: Push Docker Image to ECR
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag for the Docker image'
+        required: true
+      aws_account_id:
+        description: 'AWS Account ID'
+        required: true
+      aws_region:
+        description: 'AWS Region'
+        required: true
+      ecr_repository:
+        description: 'ECR Repository Name'
+        required: true
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Docker image artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image
+
+      - name: Load Docker image
+        run: |
+          docker load < app-image.tar.gz
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ github.event.inputs.aws_region }}
+
+      - name: Authenticate Docker with ECR
+        run: |
+          aws ecr get-login-password --region ${{ github.event.inputs.aws_region }} | \
+          docker login --username AWS --password-stdin ${{ github.event.inputs.aws_account_id }}.dkr.ecr.${{ github.event.inputs.aws_region }}.amazonaws.com
+
+      - name: Push Docker image to ECR
+        run: |
+          IMAGE_NAME=${{ github.event.inputs.aws_account_id }}.dkr.ecr.${{ github.event.inputs.aws_region }}.amazonaws.com/${{ github.event.inputs.ecr_repository }}
+          TAG=${{ github.event.inputs.tag }}
+          docker tag app-image:$TAG $IMAGE_NAME:$TAG
+          docker push $IMAGE_NAME:$TAG
