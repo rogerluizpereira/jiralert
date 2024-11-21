@@ -1,0 +1,19 @@
+name: Default
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build from'
+        required: false
+        default: 'master'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      REPO_NAME: ${{ steps.extract-info.outputs.REPO_NAME }}
+      VERSION: ${{ steps.extract-info.outputs.VERSION }}
+      IMAGE_NAME: ${{ steps.extract-info.outputs.IMAGE_NAME }}
+    steps:        
+    - name: Build
+      uses: rogerluizpereira/shared-actions/.github/actions/docker-build
