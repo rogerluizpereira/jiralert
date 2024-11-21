@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:        
     - name: Build
+      id: build
       uses: rogerluizpereira/shared-actions/.github/actions/docker-build@master
     - name: Push
       uses: rogerluizpereira/shared-actions/.github/actions/ecr-push@master
