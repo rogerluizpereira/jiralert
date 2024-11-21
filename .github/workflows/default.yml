@@ -16,4 +16,4 @@ jobs:
       IMAGE_NAME: ${{ steps.extract-info.outputs.IMAGE_NAME }}
     steps:        
     - name: Build
-      uses: rogerluizpereira/shared-actions/.github/actions/docker-build
+      uses: rogerluizpereira/shared-actions/.github/actions/docker-build@master
