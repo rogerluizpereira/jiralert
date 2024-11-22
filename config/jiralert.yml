@@ -5,9 +5,9 @@ defaults:
   # jira site url
   api_url: ${JIRA_API_URL}
   # jira user, in general a e-mail
-  user: ${JIRA_USER}
+  user: '{arn:aws:secretsmanager:us-east-1:572711339557:secret:root/${ENVIRONMENT}/jiralert[JIRA_USER]}'
   #jira api token created in user account
-  password: ${JIRA_TOKEN}
+  password: '{arn:aws:secretsmanager:us-east-1:572711339557:secret:root/${ENVIRONMENT}/jiralert[JIRA_TOKEN]}'
   # Alternatively to user and password use a Personal Access Token
   # personal_access_token: "Your Personal Access Token". See https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html
 

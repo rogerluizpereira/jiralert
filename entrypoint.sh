@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Iniciando $0"
-echo "Container: $(basename $(cat /proc/self/cgroup | grep 'memory' | cut -d/ -f3))"
+echo "Container: $(basename $(cat /proc/self/cgroup | grep 'memory'))"
 # Configura o script para terminar imediatamente em caso de erro, para que
 # não continue executando de forma inconsistente e/ou imprevisível
 set -e
