@@ -22,7 +22,7 @@ jobs:
         image-name: ${{ steps.build.outputs.image-name }}
         image-tag: ${{ steps.build.outputs.image-tag }}
 
-    - name: Push
+    - name: Deploy
       uses: rogerluizpereira/shared-actions/.github/actions/ecs-deploy@master
       with:
         aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
