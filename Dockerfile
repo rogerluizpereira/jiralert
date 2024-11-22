@@ -22,6 +22,6 @@ RUN apk add --no-cache \
 WORKDIR /jiralert/
 COPY --from=builder /go/bin/ /jiralert/
 
-#ENTRYPOINT [ "/jiralert/entrypoint.sh" ]
+ENTRYPOINT [ "/jiralert/entrypoint.sh" ]
 #Apenas para debug, mantém o container rodando
-CMD ["tail", "-f", "/dev/null"]
+#CMD ["tail", "-f", "/dev/null"]

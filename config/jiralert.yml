@@ -3,16 +3,24 @@
 defaults:
   # API access fields.
   # jira site url
-  api_url: ${JIRA_API_URL}
+  # In our case this is the same value for all environments
+  api_url: 'https://grancursosonline.atlassian.net' 
   # jira user, in general a e-mail
-  user: '{arn:aws:secretsmanager:us-east-1:572711339557:secret:root/${ENVIRONMENT}/jiralert[JIRA_USER]}'
+  # In our case we have different credentials for each environment, then
+  # we use a pattern with ${ENVIRONMENT} interpolation
+  user: '{root/${ENVIRONMENT}/jiralert[JIRA_USER]}'
   #jira api token created in user account
-  password: '{arn:aws:secretsmanager:us-east-1:572711339557:secret:root/${ENVIRONMENT}/jiralert[JIRA_TOKEN]}'
+  # In our case we have different credentials for each environment, then
+  # we use a pattern with ${ENVIRONMENT} interpolation
+  password: '{root/${ENVIRONMENT}/jiralert[JIRA_TOKEN]}'
   # Alternatively to user and password use a Personal Access Token
   # personal_access_token: "Your Personal Access Token". See https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html
 
   # JIRA project to create the issue in. Required.
-  project: ${JIRA_PROJECT}
+  # In our case we have same project for all environments, but if necessary
+  # we could use a pattern with ${ENVIRONMENT} interpolation on name of projet
+  # or even receive this value from environment variable substitution like ${PROJECT}
+  project: OPC
   # The type of JIRA issue to create. Required.
   issue_type: OPC-Alerta
   # Issue priority. Optional.
