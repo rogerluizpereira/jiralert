@@ -10,6 +10,7 @@ jobs:
     - name: Build
       id: build
       uses: rogerluizpereira/shared-actions/.github/actions/docker-build@master
+
     - name: Push
       uses: rogerluizpereira/shared-actions/.github/actions/ecr-push@master
       with:
@@ -20,3 +21,15 @@ jobs:
         aws-account: ${{ vars.AWS_ACCOUNT_ID }}
         image-name: ${{ steps.build.outputs.image-name }}
         image-tag: ${{ steps.build.outputs.image-tag }}
+
+    - name: Push
+      uses: rogerluizpereira/shared-actions/.github/actions/ecs-deploy@master
+      with:
+        aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        aws-region: ${{ vars.AWS_REGION }}
+        aws-account: ${{ vars.AWS_ACCOUNT_ID }}
+        image-name: ${{ steps.build.outputs.image-name }}
+        image-tag: ${{ steps.build.outputs.image-tag }}
+        environment-tag: "latest"
