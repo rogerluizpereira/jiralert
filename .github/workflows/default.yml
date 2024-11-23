@@ -30,6 +30,9 @@ jobs:
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: ${{ vars.AWS_REGION }}
         aws-account: ${{ vars.AWS_ACCOUNT_ID }}
+        aws-ecs-cluster: ${{ vars.AWS_ECS_SERVICE }}
+        aws-ecs-service: ${{ vars.AWS_ECS_CLUSTER }}
+        aws-ecs-task-definition: ./task-definition.json
         image-name: ${{ steps.build.outputs.image-name }}
         image-tag: ${{ steps.build.outputs.image-tag }}
         environment-tag: "latest"

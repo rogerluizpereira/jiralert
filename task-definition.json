@@ -1,0 +1,99 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:572711339557:task-definition/jiralert:11",
+  "containerDefinitions": [
+      {
+          "name": "jiralert",
+          "image": "572711339557.dkr.ecr.us-east-1.amazonaws.com/jiralert:latest",
+          "cpu": 0,
+          "portMappings": [
+              {
+                  "name": "jiralert-9097-tcp",
+                  "containerPort": 9097,
+                  "hostPort": 0,
+                  "protocol": "tcp",
+                  "appProtocol": "http"
+              }
+          ],
+          "essential": true,
+          "environment": [
+              {
+                  "name": "AWS_DEFAULT_REGION",
+                  "value": "us-east-1"
+              },
+              {
+                  "name": "ENVIRONMENT",
+                  "value": "prd"
+              }
+          ],
+          "mountPoints": [],
+          "volumesFrom": [],
+          "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                  "awslogs-group": "/ecs/jiralert",
+                  "mode": "non-blocking",
+                  "awslogs-create-group": "true",
+                  "max-buffer-size": "25m",
+                  "awslogs-region": "us-east-1",
+                  "awslogs-stream-prefix": "ecs"
+              }
+          },
+          "systemControls": []
+      }
+  ],
+  "family": "jiralert",
+  "taskRoleArn": "arn:aws:iam::572711339557:role/Jiralert-Service",
+  "executionRoleArn": "arn:aws:iam::572711339557:role/ecsTaskExecutionRole",
+  "revision": 11,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+      {
+          "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+      },
+      {
+          "name": "ecs.capability.execution-role-awslogs"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.ecr-auth"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.task-iam-role"
+      },
+      {
+          "name": "ecs.capability.execution-role-ecr-pull"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+      }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+      "EC2"
+  ],
+  "requiresCompatibilities": [
+      "EC2"
+  ],
+  "cpu": "128",
+  "memory": "131",
+  "runtimePlatform": {
+      "cpuArchitecture": "X86_64",
+      "operatingSystemFamily": "LINUX"
+  },
+  "tags": [
+      {
+          "key": "managed-by",
+          "value": "console"
+      },
+      {
+          "key": "environment",
+          "value": "prd"
+      }
+  ]
+}
