@@ -20,7 +20,7 @@ FROM alpine:3.19.4 AS runtime
 RUN apk add --no-cache \
      gettext
 WORKDIR /jiralert/
-COPY --from=builder /go/bin/ /jiralert/
+COPY --from=builderX /go/bin/ /jiralert/
 RUN chmod +x /jiralert/entrypoint.sh
 
 ENTRYPOINT [ "/jiralert/entrypoint.sh" ]
