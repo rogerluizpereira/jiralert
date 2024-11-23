@@ -21,6 +21,7 @@ RUN apk add --no-cache \
      gettext
 WORKDIR /jiralert/
 COPY --from=builder /go/bin/ /jiralert/
+RUN chmod +x /jiralert/entrypoint.sh
 
 ENTRYPOINT [ "/jiralert/entrypoint.sh" ]
 #Apenas para debug, mantém o container rodando
