@@ -1,5 +1,4 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:572711339557:task-definition/jiralert:11",
   "containerDefinitions": [
       {
           "name": "jiralert",
@@ -44,39 +43,8 @@
   "family": "jiralert",
   "taskRoleArn": "arn:aws:iam::572711339557:role/Jiralert-Service",
   "executionRoleArn": "arn:aws:iam::572711339557:role/ecsTaskExecutionRole",
-  "revision": 11,
   "volumes": [],
-  "status": "ACTIVE",
-  "requiresAttributes": [
-      {
-          "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-      },
-      {
-          "name": "ecs.capability.execution-role-awslogs"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.ecr-auth"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.task-iam-role"
-      },
-      {
-          "name": "ecs.capability.execution-role-ecr-pull"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
-      }
-  ],
   "placementConstraints": [],
-  "compatibilities": [
-      "EC2"
-  ],
   "requiresCompatibilities": [
       "EC2"
   ],
