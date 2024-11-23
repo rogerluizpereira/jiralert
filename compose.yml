@@ -4,8 +4,6 @@ services:
     build: .
     container_name: jiralert
     environment:
-      JIRA_API_URL: ${JIRA_API_URL}
-      JIRA_PROJECT: ${JIRA_PROJECT}
       AWS_PROFILE: ${AWS_PROFILE}
       ENVIRONMENT: ${ENVIRONMENT}
     ports:
