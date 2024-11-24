@@ -39,7 +39,6 @@ jobs:
         aws-account: ${{ vars.AWS_ACCOUNT_ID }}
         aws-ecs-cluster: ${{ vars.AWS_ECS_CLUSTER }}
         aws-ecs-service: ${{ vars.AWS_ECS_SERVICE }}
-        aws-ecs-task-definition: task-definition.json
         image-name: ${{ needs.build.outputs.image-name }}
         image-tag: ${{ needs.build.outputs.image-tag }}
         environment-tag: "latest"
