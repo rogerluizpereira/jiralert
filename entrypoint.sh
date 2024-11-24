@@ -45,7 +45,7 @@ TEMP_CONFIG_FILE=$(mktemp config.tmp.XXXXXX -p $APP_PATH/config/)
 # Obtem as configurações comuns de variáveis de ambiente e segredos 
 # do cofre evitando a exposição dos segredos em variáveis de ambiente
 # atualizando o arquivo de configuração que será usado pela aplicação
-"$APP_PATH/envconfigx" $AWS_PROFILE $CONFIG_FILE $TEMP_CONFIG_FILE
+"$APP_PATH/envconfig" $AWS_PROFILE $CONFIG_FILE $TEMP_CONFIG_FILE
 APP_PID=$!
 APP_EXIT_CODE=$?
 
