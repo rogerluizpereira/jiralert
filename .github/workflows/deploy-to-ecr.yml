@@ -1,0 +1,32 @@
+name: Deploy to ECR
+
+on:
+  workflow_dispatch:
+    inputs:
+      image-name:
+        description: 'Image Name'
+        required: false
+        default: 'jiralert'
+      image-tag:
+        description: 'Image tag'
+        required: false
+        default: 'latest'
+
+jobs:
+
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy
+      uses: rogerluizpereira/shared-actions/.github/actions/ecs-deploy@master
+      with:
+        aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        aws-region: ${{ vars.AWS_REGION }}
+        aws-account: ${{ vars.AWS_ACCOUNT_ID }}
+        aws-ecs-cluster: ${{ vars.AWS_ECS_CLUSTER }}
+        aws-ecs-service: ${{ vars.AWS_ECS_SERVICE }}
+        image-name: ${{ inputs.image-name }}
+        image-tag: ${{ inputs.image-tag }}
+        environment-tag: "latest"

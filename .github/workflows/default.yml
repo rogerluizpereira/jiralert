@@ -24,21 +24,3 @@ jobs:
         aws-account: ${{ vars.AWS_ACCOUNT_ID }}
         image-name: ${{ steps.build.outputs.image-name }}
         image-tag: ${{ steps.build.outputs.image-tag }}
-
-  Deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-    - name: Deploy
-      uses: rogerluizpereira/shared-actions/.github/actions/ecs-deploy@master
-      with:
-        aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-        aws-region: ${{ vars.AWS_REGION }}
-        aws-account: ${{ vars.AWS_ACCOUNT_ID }}
-        aws-ecs-cluster: ${{ vars.AWS_ECS_CLUSTER }}
-        aws-ecs-service: ${{ vars.AWS_ECS_SERVICE }}
-        image-name: ${{ needs.build.outputs.image-name }}
-        image-tag: ${{ needs.build.outputs.image-tag }}
-        environment-tag: "latest"
