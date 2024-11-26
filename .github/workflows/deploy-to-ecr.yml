@@ -3,14 +3,14 @@ name: Deploy to ECR
 on:
   workflow_dispatch:
     inputs:
-      image-name:
-        description: 'Image Name'
+      version:
+        description: 'Version to deploy'
         required: false
-        default: 'jiralert'
-      image-tag:
-        description: 'Image tag'
+        default: 'latest'     
+      environment:
+        description: 'Environment to deploy'
         required: false
-        default: 'latest'
+        default: 'prd'
 
 jobs:
 
@@ -27,5 +27,5 @@ jobs:
         aws-account: ${{ vars.AWS_ACCOUNT_ID }}
         aws-ecs-cluster: ${{ vars.AWS_ECS_CLUSTER }}
         aws-ecs-service: ${{ vars.AWS_ECS_SERVICE }}
-        version: ${{ inputs.image-tag }}
-        environment: "prd"
+        version: ${{ inputs.version }}
+        environment: ${{ inputs.environment }}
