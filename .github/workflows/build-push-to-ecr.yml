@@ -1,4 +1,4 @@
-name: Default
+name: Build & Push to ECR
 
 on:
   workflow_dispatch:
