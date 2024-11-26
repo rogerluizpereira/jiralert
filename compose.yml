@@ -5,7 +5,7 @@ services:
     container_name: jiralert
     environment:
       AWS_PROFILE: ${AWS_PROFILE}
-      ENVIRONMENT: ${ENVIRONMENT}
+      APP_ENV: ${APP_ENV}
     ports:
       - 9097:9097
     volumes:

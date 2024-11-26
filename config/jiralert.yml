@@ -7,18 +7,18 @@ defaults:
   api_url: 'https://grancursosonline.atlassian.net' 
   # jira user, in general a e-mail
   # In our case we have different credentials for each environment, then
-  # we use a pattern with ${ENVIRONMENT} interpolation
+  # we use a pattern with environment interpolation
   user: '{root/${APP_ENV}/jiralert[JIRA_USER]}'
   #jira api token created in user account
   # In our case we have different credentials for each environment, then
-  # we use a pattern with ${ENVIRONMENT} interpolation
+  # we use a pattern with environment interpolation
   password: '{root/${APP_ENV}/jiralert[JIRA_TOKEN]}'
   # Alternatively to user and password use a Personal Access Token
   # personal_access_token: "Your Personal Access Token". See https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html
 
   # JIRA project to create the issue in. Required.
   # In our case we have same project for all environments, but if necessary
-  # we could use a pattern with ${ENVIRONMENT} interpolation on name of projet
+  # we could use a pattern with environment interpolation on name of projet
   # or even receive this value from environment variable substitution like ${PROJECT}
   project: OPC
   # The type of JIRA issue to create. Required.
