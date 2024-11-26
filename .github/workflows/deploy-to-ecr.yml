@@ -27,6 +27,5 @@ jobs:
         aws-account: ${{ vars.AWS_ACCOUNT_ID }}
         aws-ecs-cluster: ${{ vars.AWS_ECS_CLUSTER }}
         aws-ecs-service: ${{ vars.AWS_ECS_SERVICE }}
-        image-name: ${{ inputs.image-name }}
-        image-tag: ${{ inputs.image-tag }}
-        environment-tag: "latest"
+        version: ${{ inputs.image-tag }}
+        environment: "prd"
