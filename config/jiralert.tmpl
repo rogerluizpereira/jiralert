@@ -4,11 +4,10 @@
 
 
 {{ define "jiralert.summary" }}
-{{ .CommonLabels.alertname }} |
-{{ if .CommonLabels.instance }}{{ .CommonLabels.instance }}{{ end }}
+{{ .CommonLabels.alertname }} | {{ if .CommonLabels.instance }}{{ .CommonLabels.instance }}{{ end }}
 {{ if .CommonLabels.target_group }}{{ .CommonLabels.target_group }}{{ end }}
 {{ if .CommonLabels.service_name }}{{ .CommonLabels.service_name }}{{ end }}
-{{ if .CommonLabels.cluster_name }}{{ if .CommonLabels.service_name }}|{{end}}{{ .CommonLabels.cluster_name }}{{ end }}
+{{ if .CommonLabels.cluster_name }}{{ if .CommonLabels.service_name }} | {{end}}{{ .CommonLabels.cluster_name }}{{ end }}
 {{ if .CommonLabels.name }}{{ .CommonLabels.name }}{{ end }}
 {{ if .CommonLabels.queue_name }}{{ .CommonLabels.queue_name }}{{ end }}
 {{ if .CommonLabels.queue }}{{ .CommonLabels.queue }}{{ end }}
