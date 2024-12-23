@@ -6,7 +6,7 @@ on:
       version:
         description: 'Version to deploy'
         required: false
-        default: 'latest'     
+        default: 'master'     
       environment:
         description: 'Environment to deploy'
         required: false
