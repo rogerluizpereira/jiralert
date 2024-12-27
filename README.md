@@ -15,3 +15,6 @@ https://www.prometheus.io/webtools/alerting/routing-tree-editor/
 
 Ferramenta para verificação da config do alertmanager
 ./amtool check-config alertmanager.yml
+
+Ferramenta para editar GO Templates online
+https://gotemplate.io/
