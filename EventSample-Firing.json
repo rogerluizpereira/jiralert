@@ -40,10 +40,22 @@
       "service_name": "nome_servico"
     },
     "commonLabels": {
-      "alertname": "HighResourceUsage",
-      "severity": "critical",
-      "service_name": "nome_servico",
-      "team-owner": "TeamName"
+        "alertname": "ECS_Job_Running_More_Than_2_Hours",
+        "cluster": "ecs-grancursos-jobs-prd",
+        "service": "es-api-prd",
+        "account": "Online",
+        "severity": "critical",
+        "service_name": "nome_servico",
+        "team-owner": "TeamName",
+        "instance":"10.10.33.88",
+        "container": "ecs-es-api-prd-1238-es-api-prd-bcc9a0f7dfed8a895900",
+        "dashboard_url": "https://grafana.infra-shared.grancursosonline.com.br/d/rEylLV0nk/ecs-monitoring?var-environment=prd&var-cluster=ecs-grancursos-jobs-prd&var-service=es-api-prd",
+        "environment": "prd",
+        "image_name": "es-api",
+        "region": "sa-east-1b",
+        "task_arn": "arn:aws:ecs:sa-east-1:130411430258:task/ecs-grancursos-jobs-prd/8bc50ef719fa44c4b85ecdc299cbffbd",
+        "task_definition_family": "es-api-prd",
+        "api_name":"gco-audiobooks-prd-ServerlessStack-HVA7LH3TZFAA"
     },
     "commonAnnotations": {
       "summary": "Multiple resources are over usage thresholds",
