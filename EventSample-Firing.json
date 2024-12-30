@@ -36,8 +36,10 @@
       }
     ],
     "groupLabels": {
-      "alertname": "HighResourceUsage",
-      "service_name": "nome_servico"
+      "account":"Online",
+      "alertname":"ECS_Node_Disk_Utilization_Sigeco_Api",
+      "instance":"172.31.1.181",
+      "severity":"critical"
     },
     "commonLabels": {
         "alertname": "ECS_Job_Running_More_Than_2_Hours",
